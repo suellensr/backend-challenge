@@ -23,5 +23,4 @@ public class StatusController {
         StatusResponseDTO statusResponseDTO = orderService.updateStatus(statusRequestDTO);
         return ResponseEntity.ok(statusResponseDTO);
     }
-
 }

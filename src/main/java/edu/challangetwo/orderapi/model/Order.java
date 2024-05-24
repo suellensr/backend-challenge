@@ -17,11 +17,6 @@ public class Order {
 
     public Order() {}
 
-    public Order(String id, List<Item> items) {
-        this.id = id;
-        this.items = items;
-    }
-
     public String getId() {
         return id;
     }

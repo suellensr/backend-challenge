@@ -11,8 +11,4 @@ public class OrderUpdateDTO {
     public List<ItemDTO> getItens() {
         return itens;
     }
-
-    public void setItens(List<ItemDTO> itens) {
-        this.itens = itens;
-    }
 }

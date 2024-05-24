@@ -13,20 +13,4 @@ public class StatusResponseDTO {
         this.pedido = pedido;
         this.status = status;
     }
-
-    public String getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(String pedido) {
-        this.pedido = pedido;
-    }
-
-    public List<String> getStatus() {
-        return status;
-    }
-
-    public void setStatus(List<String> status) {
-        this.status = status;
-    }
 }

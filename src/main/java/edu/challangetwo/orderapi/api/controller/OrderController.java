@@ -49,10 +49,4 @@ public class OrderController {
         orderService.deleteOrderById(orderId);
         return ResponseEntity.noContent().build();
     }
-
-//    @PostMapping("/{orderId}/status")
-//    public ResponseEntity<StatusResponseDTO> updateOrderStatus(@PathVariable Long orderId, @RequestBody StatusRequestDTO statusRequestDTO) {
-//        StatusResponseDTO statusResponse = statusService.updateStatus(orderId, statusRequestDTO);
-//        return ResponseEntity.ok(statusResponse);
-//    }
 }
