@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -49,15 +50,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO updateOrder(String orderId, OrderUpdateDTO orderUpdateDTO) {
-        if(!orderExists(orderId))
-            throw new ResourceNotFoundException("Order with id " + orderId + "does not exist.");
+        Order existingOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Order with id " + orderId + "does not exists."));
 
-        Order order = orderMapper.orderUpdateDTOToOrder(orderId, orderUpdateDTO);
-        createItem(order);
-        Order updatedOrder = orderRepository.save(order);
+        itemRepository.deleteByOrder(existingOrder);
 
-        return orderMapper.orderToOrderDTO(updatedOrder);  //fazer o teste direitinho
+        List<Item> newItems = new ArrayList<>();
+        for (ItemDTO itemDTO : orderUpdateDTO.getItens()) {
+            newItems.add(orderMapper.itemDTOtoItem(itemDTO));
+        }
+
+        existingOrder.setItems(newItems);
+        createItem(existingOrder);
+        Order updatedOrder = orderRepository.save(existingOrder);
+
+        return orderMapper.orderToOrderDTO(updatedOrder);
     }
 
     @Override
@@ -67,13 +76,6 @@ public class OrderServiceImpl implements OrderService {
         for(Order order : orders) {
             ordersDTO.add(orderMapper.orderToOrderDTO(order));
         }
-
-//        OrderDTO orderDTO;
-//        List<OrderDTO> ordersDTO = new ArrayList<>();;
-//        for (Order order : orders) {
-//            orderDTO = orderMapper.orderToOrderDTO(order);
-//            ordersDTO.add(orderDTO);
-//        }
         return ordersDTO;
     }
 
@@ -116,7 +118,6 @@ public class OrderServiceImpl implements OrderService {
         order.getItems().forEach(item -> {
             item.setOrder(order); // Ensure bidirectional relationship
             validateItems(item);
-            //itemRepository.save(item);
         });
     }
 

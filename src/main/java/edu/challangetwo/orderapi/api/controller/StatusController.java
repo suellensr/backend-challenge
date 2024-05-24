@@ -18,8 +18,8 @@ public class StatusController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/update/{orderId}")
-    public ResponseEntity<StatusResponseDTO> updateOrderStatus(@PathVariable String orderId, @RequestBody StatusRequestDTO statusRequestDTO) {
+    @PostMapping
+    public ResponseEntity<StatusResponseDTO> updateOrderStatus(@RequestBody StatusRequestDTO statusRequestDTO) {
         StatusResponseDTO statusResponseDTO = orderService.updateStatus(statusRequestDTO);
         return ResponseEntity.ok(statusResponseDTO);
     }
