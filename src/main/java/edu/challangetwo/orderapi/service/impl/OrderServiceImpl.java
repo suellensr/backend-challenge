@@ -116,7 +116,7 @@ public class OrderServiceImpl implements OrderService {
         order.getItems().forEach(item -> {
             item.setOrder(order); // Ensure bidirectional relationship
             validateItems(item);
-            itemRepository.save(item);
+            //itemRepository.save(item);
         });
     }
 

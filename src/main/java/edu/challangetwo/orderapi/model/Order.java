@@ -20,7 +20,6 @@ public class Order {
     public Order(String id, List<Item> items) {
         this.id = id;
         this.items = items;
-        this.items.forEach(item -> item.setOrder(this)); // Ensuring bidirectional relationship
     }
 
     public String getId() {
@@ -37,6 +36,5 @@ public class Order {
 
     public void setItems(List<Item> items) {
         this.items = items;
-        this.items.forEach(item -> item.setOrder(this)); // Ensuring bidirectional relationship
     }
 }

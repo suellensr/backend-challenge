@@ -47,14 +47,6 @@ public class OrderMapper {
         return order;
     }
 
-//    public static OrderUpdateDTO orderToOrderUpdateDTO(Order order) {
-//        OrderUpdateDTO orderUpdateDTO = new OrderUpdateDTO();
-//        orderUpdateDTO.setItens(order.getItems().stream()
-//                .map(OrderMapper::itemToItemDTO)
-//                .collect(Collectors.toList()));
-//        return orderUpdateDTO;
-//    }
-
     public static Item itemDTOtoItem(ItemDTO itemDTO) {
         Item item = new Item();
         item.setDescription(itemDTO.getDescricao());
