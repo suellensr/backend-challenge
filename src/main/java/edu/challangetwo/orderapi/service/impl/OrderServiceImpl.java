@@ -13,6 +13,7 @@ import edu.challangetwo.orderapi.service.interfaces.OrderService;
 import edu.challangetwo.orderapi.service.util.CheckOrderStatus;
 import edu.challangetwo.orderapi.service.util.OrderMapper;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final CheckOrderStatus checkOrderStatus;
 
+    @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, ItemRepository itemRepository, OrderMapper orderMapper, CheckOrderStatus checkOrderStatus) {
         this.orderRepository = orderRepository;
         this.itemRepository = itemRepository;
@@ -121,8 +123,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void validateItems(Item item) {
-        if(item.getUnitPrice().compareTo(BigDecimal.ZERO) < 0 || item.getQuantity() <= 0)
+        if(item.getUnitPrice().compareTo(BigDecimal.ZERO) <= 0 || item.getQuantity() <= 0)
             throw new InvalidPriceOrQuantityException("Invalid price or quantity for item: " + item.getDescription());
     }
 }
-

@@ -23,15 +23,31 @@ public class StatusRequestDTO {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public int getItensAprovados() {
         return itensAprovados;
+    }
+
+    public void setItensAprovados(int itensAprovados) {
+        this.itensAprovados = itensAprovados;
     }
 
     public BigDecimal getValorAprovado() {
         return valorAprovado;
     }
 
+    public void setValorAprovado(BigDecimal valorAprovado) {
+        this.valorAprovado = valorAprovado;
+    }
+
     public String getPedido() {
         return pedido;
+    }
+
+    public void setPedido(String pedido) {
+        this.pedido = pedido;
     }
 }
