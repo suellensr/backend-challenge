@@ -1,20 +1,12 @@
 package edu.challangetwo.orderapi.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 
 @Entity
 @Table(name = "tb_item")
-public class Item implements Serializable {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,19 +16,62 @@ public class Item implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
 
     @Column(nullable = false)
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "id_order", nullable = false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    public Item(String description, BigDecimal unitPrice, Integer quantity) {
+    public Item() {}
+
+    public Item(String description, BigDecimal unitPrice, int quantity, Order order) {
         this.description = description;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
+        this.order = order;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

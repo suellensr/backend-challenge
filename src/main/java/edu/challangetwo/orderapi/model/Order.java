@@ -1,33 +1,42 @@
 package edu.challangetwo.orderapi.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
+public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_order")
-    private Long id;
+    private String id;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Item> items;
 
-    @ElementCollection(targetClass = OrderStatus.class)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "order_status", joinColumns = @JoinColumn(name = "order_id"))
-    @Column(name = "status", nullable = true)
-    private List<OrderStatus> status = new ArrayList<>();
+    public Order() {}
+
+    public Order(String id, List<Item> items) {
+        this.id = id;
+        this.items = items;
+        this.items.forEach(item -> item.setOrder(this)); // Ensuring bidirectional relationship
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+        this.items.forEach(item -> item.setOrder(this)); // Ensuring bidirectional relationship
+    }
 }
