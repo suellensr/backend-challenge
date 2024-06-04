@@ -56,5 +56,4 @@ public class ItemDTO {
     public int hashCode() {
         return Objects.hash(descricao, precoUnitario, qtd);
     }
-
 }

@@ -25,7 +25,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -272,6 +273,4 @@ class OrderServiceImplTest {
 
         assertThat(statusResponseDTO.getStatus()).isEqualTo(List.of(OrderStatus.APROVADO.toString()));
     }
-
-
 }

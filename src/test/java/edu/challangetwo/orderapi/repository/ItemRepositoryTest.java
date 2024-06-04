@@ -62,5 +62,4 @@ class ItemRepositoryTest {
         itemB.setOrder(order);
         entityManager.persist(itemB);
     }
-
 }
