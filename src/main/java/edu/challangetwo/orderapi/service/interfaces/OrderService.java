@@ -15,6 +15,6 @@ public interface OrderService {
     OrderDTO updateOrder(String orderId, OrderUpdateDTO orderUpdateDTO) throws ResourceNotFoundException;
     List<OrderDTO> getAllOrders();
     OrderDTO getOrderById(String orderId) throws ResourceNotFoundException;
-    void deleteOrderById(String orderId) throws ResourceNotFoundException;
+    String deleteOrderById(String orderId) throws ResourceNotFoundException;
     StatusResponseDTO updateStatus(StatusRequestDTO statusRequestDTO);
 }

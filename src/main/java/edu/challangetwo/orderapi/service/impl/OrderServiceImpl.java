@@ -1,6 +1,10 @@
 package edu.challangetwo.orderapi.service.impl;
 
-import edu.challangetwo.orderapi.api.dto.*;
+import edu.challangetwo.orderapi.api.dto.ItemDTO;
+import edu.challangetwo.orderapi.api.dto.OrderDTO;
+import edu.challangetwo.orderapi.api.dto.OrderUpdateDTO;
+import edu.challangetwo.orderapi.api.dto.StatusRequestDTO;
+import edu.challangetwo.orderapi.api.dto.StatusResponseDTO;
 import edu.challangetwo.orderapi.exception.InvalidPriceOrQuantityException;
 import edu.challangetwo.orderapi.exception.ResourceAlreadyExistsException;
 import edu.challangetwo.orderapi.exception.ResourceNotFoundException;
@@ -25,14 +29,12 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
-    private final OrderMapper orderMapper;
     private final CheckOrderStatus checkOrderStatus;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, ItemRepository itemRepository, OrderMapper orderMapper, CheckOrderStatus checkOrderStatus) {
+    public OrderServiceImpl(OrderRepository orderRepository, ItemRepository itemRepository, CheckOrderStatus checkOrderStatus) {
         this.orderRepository = orderRepository;
         this.itemRepository = itemRepository;
-        this.orderMapper = orderMapper;
         this.checkOrderStatus = checkOrderStatus;
     }
 
@@ -40,42 +42,42 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderDTO createOrder(OrderDTO orderDTO) {
         String orderDTOId = orderDTO.getPedido();
-        if(orderExists(orderDTOId))
-            throw new ResourceAlreadyExistsException("Order with id " + orderDTOId + "already exists.");
+        if (orderExists(orderDTOId))
+            throw new ResourceAlreadyExistsException("Order with id " + orderDTOId + " already exists.");
 
-        Order order = orderMapper.orderDTOToOrder(orderDTO);
+        Order order = OrderMapper.orderDTOToOrder(orderDTO);
         Order savedOrder = orderRepository.save(order);
         createItem(order);
 
-        return orderMapper.orderToOrderDTO(savedOrder);  //fazer o teste direitinho
+        return OrderMapper.orderToOrderDTO(savedOrder);
     }
 
     @Override
     @Transactional
     public OrderDTO updateOrder(String orderId, OrderUpdateDTO orderUpdateDTO) {
         Order existingOrder = orderRepository.findById(orderId)
-                .orElseThrow(() -> new ResourceNotFoundException("Order with id " + orderId + "does not exists."));
+                .orElseThrow(() -> new ResourceNotFoundException("Order with id " + orderId + " does not exists."));
 
         itemRepository.deleteByOrder(existingOrder);
 
         List<Item> newItems = new ArrayList<>();
         for (ItemDTO itemDTO : orderUpdateDTO.getItens()) {
-            newItems.add(orderMapper.itemDTOtoItem(itemDTO));
+            newItems.add(OrderMapper.itemDTOtoItem(itemDTO));
         }
 
         existingOrder.setItems(newItems);
         createItem(existingOrder);
         Order updatedOrder = orderRepository.save(existingOrder);
 
-        return orderMapper.orderToOrderDTO(updatedOrder);
+        return OrderMapper.orderToOrderDTO(updatedOrder);
     }
 
     @Override
     public List<OrderDTO> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
         List<OrderDTO> ordersDTO = new ArrayList<>();
-        for(Order order : orders) {
-            ordersDTO.add(orderMapper.orderToOrderDTO(order));
+        for (Order order : orders) {
+            ordersDTO.add(OrderMapper.orderToOrderDTO(order));
         }
         return ordersDTO;
     }
@@ -85,23 +87,23 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id " + orderId));
 
-        return orderMapper.orderToOrderDTO(order);
+        return OrderMapper.orderToOrderDTO(order);
     }
 
     @Override
-    public void deleteOrderById(String orderId) {
-        if(!orderExists(orderId))
-            throw new ResourceNotFoundException("Order with id " + orderId + "does not exist.");
+    public String deleteOrderById(String orderId) {
+        if (!orderExists(orderId))
+            throw new ResourceNotFoundException("Order with id " + orderId + " does not exist.");
 
-        getOrderById(orderId);
         orderRepository.deleteById(orderId);
+        return "Order with id "  + orderId + " has been deleted successfully.";
     }
 
     @Override
     public StatusResponseDTO updateStatus(StatusRequestDTO statusRequestDTO) {
         String orderId = statusRequestDTO.getPedido();
         List<String> statusList = new ArrayList<>();
-        if(!orderExists(orderId))
+        if (!orderExists(orderId))
             statusList.add(OrderStatus.CODIGO_PEDIDO_INVALIDO.toString());
         else {
             OrderDTO orderDTO = getOrderById(orderId);
@@ -123,7 +125,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void validateItems(Item item) {
-        if(item.getUnitPrice().compareTo(BigDecimal.ZERO) <= 0 || item.getQuantity() <= 0)
+        if (item.getUnitPrice().compareTo(BigDecimal.ZERO) <= 0 || item.getQuantity() <= 0)
             throw new InvalidPriceOrQuantityException("Invalid price or quantity for item: " + item.getDescription());
     }
 }

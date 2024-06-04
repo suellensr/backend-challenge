@@ -2,7 +2,6 @@ package edu.challangetwo.orderapi.service.util;
 
 import edu.challangetwo.orderapi.api.dto.ItemDTO;
 import edu.challangetwo.orderapi.api.dto.OrderDTO;
-import edu.challangetwo.orderapi.api.dto.OrderUpdateDTO;
 import edu.challangetwo.orderapi.model.Item;
 import edu.challangetwo.orderapi.model.Order;
 import org.springframework.stereotype.Component;

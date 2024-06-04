@@ -1,16 +1,24 @@
 package edu.challangetwo.orderapi.api.dto;
 
-import edu.challangetwo.orderapi.model.OrderStatus;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class StatusRequestDTO {
 
+    @NotNull
     private String status;
+
+    @NotNull
     private int itensAprovados;
+
+    @NotNull
     private BigDecimal valorAprovado;
+
+    @NotNull
     private String pedido;
+
+    public StatusRequestDTO() {}
 
     public StatusRequestDTO(String status, int itensAprovados, BigDecimal valorAprovado, String pedido) {
         this.status = status;

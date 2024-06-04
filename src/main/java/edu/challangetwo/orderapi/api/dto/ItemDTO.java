@@ -1,11 +1,19 @@
 package edu.challangetwo.orderapi.api.dto;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class ItemDTO {
 
+    @NotNull
     private String descricao;
+
+    @NotNull
     private BigDecimal precoUnitario;
+
+    @NotNull
     private int qtd;
 
     public ItemDTO() {}
@@ -33,4 +41,20 @@ public class ItemDTO {
     public void setQtd(int qtd) {
         this.qtd = qtd;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemDTO itemDTO = (ItemDTO) o;
+        return  Objects.equals(descricao, itemDTO.getDescricao()) &&
+                Objects.equals(precoUnitario, itemDTO.getPrecoUnitario()) &&
+                Objects.equals(qtd, itemDTO.getQtd());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(descricao, precoUnitario, qtd);
+    }
+
 }
