@@ -139,9 +139,10 @@ A aplicação será iniciada em http://localhost:8080.
 "valorAprovado": 20,
 "pedido": "123456"
 }
-Resposta de Sucesso:
-json
-Copiar código
+```
+
+* Resposta de Sucesso:
+```
 {
 "pedido": "123456",
 "status": ["APROVADO"]
