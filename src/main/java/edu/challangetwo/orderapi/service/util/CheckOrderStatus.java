@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class CheckOrderStatus {
 
-    public List<String> updateStatus(OrderDTO orderDTO, StatusRequestDTO statusRequestDTO) {
+    public static List<String> updateStatus(OrderDTO orderDTO, StatusRequestDTO statusRequestDTO) {
 
         List<String> statusList = new ArrayList<>();
 

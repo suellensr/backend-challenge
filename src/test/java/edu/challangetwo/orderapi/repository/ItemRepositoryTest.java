@@ -17,20 +17,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Nested
 @DataJpaTest
 @ActiveProfiles("test")
-class ItemRepositoryTest {
+public class ItemRepositoryTest {
 
     @Autowired
-    ItemRepository itemRepository;
+    public ItemRepository itemRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    public OrderRepository orderRepository;
 
     @Autowired
-    EntityManager entityManager;
+    public EntityManager entityManager;
 
     @Test
     @DisplayName("Should delete an Item by Order number successfully from DB")
-    void deleteByOrder() {
+    public void deleteByOrder() {
         Order order = new Order();
         order.setId("123456");
         entityManager.persist(order);
