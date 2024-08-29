@@ -16,9 +16,11 @@ import edu.challangetwo.orderapi.repository.OrderRepository;
 import edu.challangetwo.orderapi.service.interfaces.OrderService;
 import edu.challangetwo.orderapi.service.util.CheckOrderStatus;
 import edu.challangetwo.orderapi.service.util.OrderMapper;
-import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

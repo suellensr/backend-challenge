@@ -1,12 +1,13 @@
 package edu.challangetwo.orderapi.api.dto;
 
-import org.antlr.v4.runtime.misc.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
 public class StatusRequestDTO {
 
-    @NotNull
+    @NotBlank
     private String status;
 
     @NotNull
@@ -15,7 +16,7 @@ public class StatusRequestDTO {
     @NotNull
     private BigDecimal valorAprovado;
 
-    @NotNull
+    @NotBlank
     private String pedido;
 
     public StatusRequestDTO() {}

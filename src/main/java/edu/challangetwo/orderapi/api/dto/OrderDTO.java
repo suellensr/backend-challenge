@@ -1,16 +1,20 @@
 package edu.challangetwo.orderapi.api.dto;
 
-import org.antlr.v4.runtime.misc.NotNull;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Objects;
 
 public class OrderDTO {
 
-    @NotNull
+    @NotBlank
     private String pedido;
 
     @NotNull
+    @NotEmpty
     private List<ItemDTO> itens;
 
     public OrderDTO() {}

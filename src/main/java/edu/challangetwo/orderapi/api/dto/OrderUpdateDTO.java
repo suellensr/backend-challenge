@@ -1,12 +1,13 @@
 package edu.challangetwo.orderapi.api.dto;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class OrderUpdateDTO {
 
     @NotNull
+    @NotEmpty
     private List<ItemDTO> itens;
 
     public OrderUpdateDTO() {}

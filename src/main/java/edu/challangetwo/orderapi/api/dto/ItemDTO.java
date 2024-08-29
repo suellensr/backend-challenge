@@ -1,13 +1,14 @@
 package edu.challangetwo.orderapi.api.dto;
 
-import org.antlr.v4.runtime.misc.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ItemDTO {
 
-    @NotNull
+    @NotBlank
     private String descricao;
 
     @NotNull
