@@ -156,5 +156,4 @@ O banco de dados em memória H2 também pode ser consultado a partir da URL http
 
 ## Exemplo de uso
 
-[![Assista ao vídeo](https://img.youtube.com/vi/)](https://www.youtube.com/embed/AysDd-GO5kY)
-
+[![Exemplo de Uso](https://img.youtube.com/vi/tUxuFuHxtw8/hqdefault.jpg)](https://youtu.be/tUxuFuHxtw8)
