@@ -29,6 +29,10 @@ Ela gerencia pedidos e suas alterações de status conforme as regras de negóci
 git clone https://github.com/suellensr/backend-challenge.git
 ```
 4. Pressione ENTER para criar uma cópia local do repositório.
+5. Após clonar o repositório, acesse a branch específica para revisão:
+```
+git checkout suellensr
+```
 
 ### Executando a Aplicação
 
