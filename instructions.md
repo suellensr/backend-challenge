@@ -6,8 +6,8 @@ Ela gerencia pedidos e suas alterações de status conforme as regras de negóci
 
 ## Tecnologias Utilizadas
 
-* Java 21 
-* Spring Boot 3.2.5
+* Java 11 
+* Spring Boot
 * H2 Database (banco de dados em memória)
 * Maven (para gerenciamento de dependências)
 * JUnit
@@ -16,8 +16,9 @@ Ela gerencia pedidos e suas alterações de status conforme as regras de negóci
 
 ### Pré-requisitos
 
-* Certifique-se de ter o JDK 11 instalado.
-* Tenha o Maven instalado.
+* Certifique-se de ter o JDK 11 instalado
+* Tenha o Maven instalado
+* Git instalado
 
 ### Clonando o Repositório
 
@@ -31,7 +32,7 @@ git clone https://github.com/suellensr/backend-challenge.git
 
 ### Executando a Aplicação
 
-1. No terminal, certifique-se que está no endereço do repositório backend-challenge
+1. No terminal, certifique-se que está no endereço do repositório backend-challenge-two
 2. Execute o comando abaixo para buildar o projeto
 ```
 mvn clean install
